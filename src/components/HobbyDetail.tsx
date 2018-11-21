@@ -16,6 +16,7 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
         this.state = {
             open: false
         }
+        this.updateHobby = this.updateHobby.bind(this)
 
     }
 
@@ -23,35 +24,35 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
         const currentHobby = this.props.currentHobby
         const { open } = this.state;
 		return (
-			<div className="container Hobby-wrapper">
-                <div className="row Hobby-heading">
+			<div className="container meme-wrapper">
+                <div className="row meme-heading">
                     <b>{currentHobby.title}</b>&nbsp; ({currentHobby.tags})
                 </div>
-                <div className="row Hobby-date">
+                <div className="row meme-date">
                     {currentHobby.uploaded}
                 </div>
-                <div className="row Hobby-img">
+                <div className="row meme-img">
                     <img src={currentHobby.url}/>
                 </div>
                 
-                <div className="row Hobby-done-button">
+                <div className="row meme-done-button">
                     <div className="btn btn-primary btn-action" onClick={this.downloadHobby.bind(this, currentHobby.url)}>Download </div>
                     <div className="btn btn-primary btn-action" onClick={this.onOpenModal}>Edit </div>
-                    <div className="btn btn-primary btn-action" onClick={this.methodNotImplemented.bind(this, currentHobby.id)}>Delete </div>
+                    <div className="btn btn-primary btn-action" onClick={this.deleteHobbyCheckpoint.bind(this, currentHobby.id)}>Delete </div>
                 </div>
                 <Modal open={open} onClose={this.onCloseModal}>
                     <form>
                         <div className="form-group">
                             <label>Hobby Title</label>
-                            <input type="text" className="form-control" id="Hobby-edit-title-input" placeholder="Enter Title"/>
+                            <input type="text" className="form-control" id="meme-edit-title-input" placeholder="Enter Title"/>
                             <small className="form-text text-muted">You can edit any Hobby Checkpoint later</small>
                         </div>
                         <div className="form-group">
                             <label>Tag</label>
-                            <input type="text" className="form-control" id="Hobby-edit-tag-input" placeholder="Enter Tag"/>
+                            <input type="text" className="form-control" id="meme-edit-tag-input" placeholder="Enter Tag"/>
                             <small className="form-text text-muted">Tag is used for search</small>
                         </div>
-                        <button type="button" className="btn" onClick={this.methodNotImplemented}>Save</button>
+                        <button type="button" className="btn" onClick={this.updateHobby}>Save</button>
                     </form>
                 </Modal>
             </div>
@@ -68,12 +69,64 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
 		this.setState({ open: false });
     };
     
-    private methodNotImplemented() {
-		alert("Method not implemented")
-	}
+    // private methodNotImplemented() {
+	// alert("Method not implemented")
+	// }
 
     // Open meme image in new tab
     private downloadHobby(url: any) {
         window.open(url);
+    }
+    // update a hobby checkpoint that has previously been uploaded
+    private updateHobby(){
+        const titleInput = document.getElementById("meme-edit-title-input") as HTMLInputElement
+        const tagInput = document.getElementById("meme-edit-tag-input") as HTMLInputElement
+    
+        if (titleInput === null || tagInput === null) {
+            return;
+        }
+    
+        const currentHobby = this.props.currentHobby
+        const url = "https://hobbytrackerapiw.azurewebsites.net/api/HobbyItems/" + currentHobby.id
+        const updatedTitle = titleInput.value
+        const updatedTag = tagInput.value
+        fetch(url, {
+            body: JSON.stringify({
+                "height": currentHobby.height,
+                "id": currentHobby.id,
+                "tags": updatedTag,
+                "title": updatedTitle,
+                "uploaded": currentHobby.uploaded,
+                "url": currentHobby.url,
+                "width": currentHobby.width
+            }),
+            headers: {'cache-control': 'no-cache','Content-Type': 'application/json'},
+            method: 'PUT'
+        })
+        .then((response : any) => {
+            if (!response.ok) {
+                // Error State
+                alert(response.statusText + " " + url)
+            } else {
+                location.reload()
+            }
+        })
+    }
+    // delete checkpoint that has been uploaded
+    private deleteHobbyCheckpoint(id: any) {
+        const url = "https://hobbytrackerapiw.azurewebsites.net/api/HobbyItems/" + id
+    
+        fetch(url, {
+            method: 'DELETE'
+        })
+        .then((response : any) => {
+            if (!response.ok) {
+                // Error Response
+                alert(response.statusText)
+            }
+            else {
+                location.reload()
+            }
+        })
     }
 }
