@@ -24,18 +24,18 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
         const currentHobby = this.props.currentHobby
         const { open } = this.state;
 		return (
-			<div className="container meme-wrapper">
-                <div className="row meme-heading">
+			<div className="container hobby-wrapper">
+                <div className="row hobby-heading">
                     <b>{currentHobby.title}</b>&nbsp; ({currentHobby.tags})
                 </div>
-                <div className="row meme-date">
+                <div className="row hobby-date">
                     {currentHobby.uploaded}
                 </div>
-                <div className="row meme-img">
+                <div className="row hobby-img">
                     <img src={currentHobby.url}/>
                 </div>
                 
-                <div className="row meme-done-button">
+                <div className="row hobby-done-button">
                     <div className="btn btn-primary btn-action" onClick={this.downloadHobby.bind(this, currentHobby.url)}>Download </div>
                     <div className="btn btn-primary btn-action" onClick={this.onOpenModal}>Edit </div>
                     <div className="btn btn-primary btn-action" onClick={this.deleteHobbyCheckpoint.bind(this, currentHobby.id)}>Delete </div>
@@ -44,12 +44,12 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
                     <form>
                         <div className="form-group">
                             <label>Hobby Title</label>
-                            <input type="text" className="form-control" id="meme-edit-title-input" placeholder="Enter Title"/>
+                            <input type="text" className="form-control" id="hobby-edit-title-input" placeholder="Enter Title"/>
                             <small className="form-text text-muted">You can edit any Hobby Checkpoint later</small>
                         </div>
                         <div className="form-group">
                             <label>Tag</label>
-                            <input type="text" className="form-control" id="meme-edit-tag-input" placeholder="Enter Tag"/>
+                            <input type="text" className="form-control" id="hobby-edit-tag-input" placeholder="Enter Tag"/>
                             <small className="form-text text-muted">Tag is used for search</small>
                         </div>
                         <button type="button" className="btn" onClick={this.updateHobby}>Save</button>
@@ -73,14 +73,14 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
 	// alert("Method not implemented")
 	// }
 
-    // Open meme image in new tab
+    // Open hobby image in new tab
     private downloadHobby(url: any) {
         window.open(url);
     }
     // update a hobby checkpoint that has previously been uploaded
     private updateHobby(){
-        const titleInput = document.getElementById("meme-edit-title-input") as HTMLInputElement
-        const tagInput = document.getElementById("meme-edit-tag-input") as HTMLInputElement
+        const titleInput = document.getElementById("hobby-edit-title-input") as HTMLInputElement
+        const tagInput = document.getElementById("hobby-edit-tag-input") as HTMLInputElement
     
         if (titleInput === null || tagInput === null) {
             return;

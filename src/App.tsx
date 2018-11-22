@@ -3,7 +3,7 @@ import Modal from 'react-responsive-modal';
 import './App.css';
 import HobbyDetail from './components/HobbyDetail';
 import HobbyList from './components/HobbyList';
-import PatrickLogo from './patrick-logo.png';
+import WebsiteLogo from './websiteIcon.png';
 
 
 interface IState {
@@ -35,7 +35,7 @@ class App extends React.Component<{}, IState> {
 		<div>
 			<div className="header-wrapper">
 				<div className="container header">
-					<img src={PatrickLogo} height='40'/>&nbsp; My Hobby Tracker - MSA 2018 &nbsp;
+					<img src={WebsiteLogo} height='40'/>&nbsp; My Hobby Tracker - MSA 2018 &nbsp;
 					<div className="btn btn-primary btn-action btn-add" onClick={this.onOpenModal}>Add Hobby CheckPoint</div>
 				</div>
 			</div>
