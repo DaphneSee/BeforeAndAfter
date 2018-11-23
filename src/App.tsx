@@ -4,7 +4,7 @@ import './App.css';
 import HobbyDetail from './components/HobbyDetail';
 import HobbyList from './components/HobbyList';
 import * as Webcam from "react-webcam";
-import WebsiteLogo from './websiteIcon.png';
+import WebsiteLogo from './beforeNAfter.png';
 
 
 interface IState {
@@ -56,16 +56,17 @@ class App extends React.Component<{}, IState> {
 			<div>
 				<div className="header-wrapper">
 					<div className="container header">
-						<img src={WebsiteLogo} height='40'/>&nbsp; My Hobby Tracker - MSA 2018 &nbsp;
-						<div className="btn btn-primary btn-action btn-add" onClick={this.onOpenModal}>Add Hobby CheckPoint</div>
+						<img src={WebsiteLogo} height='40'/>
+						<a id="title">Before And After - MSA 2018</a>
+						<div className="btn btn-primary btn-action btn-add" onClick={this.onOpenModal}> + Add new</div>
 					</div>
 				</div>
 				<div className="container">
 					<div className="row">
-						<div className="col-7">
+						<div className="col-md-7">
 							<HobbyDetail currentHobby={this.state.currentHobby} />
 						</div>
-						<div className="col-5">
+						<div className="col-md-5">
 							<HobbyList hobbies={this.state.hobbies} selectNewHobby={this.selectNewHobby} searchByTag={this.fetchHobbies}/>
 						</div>
 					</div>
@@ -96,10 +97,6 @@ class App extends React.Component<{}, IState> {
 
 		);
 	}
-
-	// private methodNotImplemented() {
-	// alert("Method not implemented")
-	// }
 
 	// Modal open
 	private onOpenModal = () => {

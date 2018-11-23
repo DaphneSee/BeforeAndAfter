@@ -21,7 +21,7 @@ export default class HobbyList extends React.Component<IProps, {}> {
 			<div className="container hobby-list-wrapper">
                 <div className="row hobby-list-heading">
                     <div className="input-group">
-                        <input type="text" id="search-tag-textbox" className="form-control" placeholder="Search By Tags" />
+                        <input type="text" id="search-tag-textbox" className="form-control" placeholder="Search By Tags"/>
                         <div className="input-group-append">
                             <div className="btn btn-outline-secondary search-button" onClick = {this.searchByTag}>Search</div>
                             <div className="btn" onClick={this.searchTagByVoice}><i className="fa fa-microphone" /></div>

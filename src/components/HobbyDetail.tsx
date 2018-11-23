@@ -24,22 +24,26 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
         const currentHobby = this.props.currentHobby
         const { open } = this.state;
 		return (
+            
 			<div className="container hobby-wrapper">
+                <div className="row hobby-done-button">
+                    <div className="btn btn-primary btn-action" onClick={this.downloadHobby.bind(this, currentHobby.url)}>Download </div>
+                    <div className="btn btn-primary btn-action" onClick={this.onOpenModal}>Edit </div>
+                    <div className="btn btn-primary btn-action" onClick={this.deleteHobbyCheckpoint.bind(this, currentHobby.id)}>Delete </div>
+                </div>
+                
+                <div className="row hobby-img">
+                    <img src={currentHobby.url}/>
+                </div>
+
                 <div className="row hobby-heading">
                     <b>{currentHobby.title}</b>&nbsp; ({currentHobby.tags})
                 </div>
                 <div className="row hobby-date">
                     {currentHobby.uploaded}
                 </div>
-                <div className="row hobby-img">
-                    <img src={currentHobby.url}/>
-                </div>
                 
-                <div className="row hobby-done-button">
-                    <div className="btn btn-primary btn-action" onClick={this.downloadHobby.bind(this, currentHobby.url)}>Download </div>
-                    <div className="btn btn-primary btn-action" onClick={this.onOpenModal}>Edit </div>
-                    <div className="btn btn-primary btn-action" onClick={this.deleteHobbyCheckpoint.bind(this, currentHobby.id)}>Delete </div>
-                </div>
+                
                 <Modal open={open} onClose={this.onCloseModal}>
                     <form>
                         <div className="form-group">
