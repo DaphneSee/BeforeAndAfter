@@ -57,7 +57,7 @@ class App extends React.Component<{}, IState> {
 				<div className="header-wrapper">
 					<div className="container header">
 						<img src={WebsiteLogo} height='40'/>
-						<a id="title">Before And After - MSA 2018</a>
+						<a id="title">Before And After - A Hobby Tracker - MSA 2018</a>
 						<div className="btn btn-primary btn-action btn-add" onClick={this.onOpenModal}> + Add new</div>
 					</div>
 				</div>

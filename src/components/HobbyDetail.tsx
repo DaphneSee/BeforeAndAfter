@@ -17,6 +17,7 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
             open: false
         }
         this.updateHobby = this.updateHobby.bind(this)
+        this.shareItem = this.shareItem.bind(this)
 
     }
 
@@ -30,6 +31,7 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
                     <div className="btn btn-primary btn-action" onClick={this.downloadHobby.bind(this, currentHobby.url)}>Download </div>
                     <div className="btn btn-primary btn-action" onClick={this.onOpenModal}>Edit </div>
                     <div className="btn btn-primary btn-action" onClick={this.deleteHobbyCheckpoint.bind(this, currentHobby.id)}>Delete </div>
+                    <div className="btn btn-primary btn-action" onClick={this.shareItem.bind(this, currentHobby.url)}><i className="fa fa-share-alt"/>Embed Code</div>
                 </div>
                 
                 <div className="row hobby-img">
@@ -75,12 +77,18 @@ export default class HobbyDetail extends React.Component<IProps, IState> {
     
     // private methodNotImplemented() {
 	// alert("Method not implemented")
-	// }
+    // }
 
     // Open hobby image in new tab
     private downloadHobby(url: any) {
         window.open(url);
     }
+
+    private shareItem(url:any){
+        alert("<a><img src=" +  url +"'/></a>")
+    }
+
+
     // update a hobby checkpoint that has previously been uploaded
     private updateHobby(){
         const titleInput = document.getElementById("hobby-edit-title-input") as HTMLInputElement
